@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+.flex {
+  display: flex;
+}
+.users {
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.users:hover {
+  background-color: #ddd;
+}

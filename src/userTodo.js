@@ -8,7 +8,7 @@ class userTodo extends React.Component {
     isLoading: true,
     users: [],
     error: null,
-    usersTodoID: ,
+    todos:[] ,
   };
   fetchTodo =(id) => {
     fetch(`https://jsonplaceholder.typicode.com/users/${id}/todos`)
@@ -36,47 +36,49 @@ class userTodo extends React.Component {
     this.fetchUsers();
   }
   render() {
-    const { isLoading, users, error, todos } = this.state;
-    return (
-      <>
-      <Link to="/"> &larr; Go back home</Link>
-        <h1>Random User</h1>
-        {error ? <p>{error.message}</p> : null}
-        {!isLoading ? (
-          users.map(user => {
-            const { name, email,id} = user;
-            return (
-              <div key={id}>
-                  <p>Email Address: {email}</p>
-                <p> ID: {id}</p>
-            <p>Name: {name}</p>
-              {/* <p>{userId.title}</p> */}
-                <button  onClick={() => this.fetchTodo(id)} >CLick
-           </button>{
-             todos.map(todo => 
-              {
-               const {Completed, title, userId} = todo;
-               return(
-              
-              <Todo  title={title} userId={userId} completed={Completed}/>
-                   
-              )
-           console.log(todo.title)
-             }
-             )
-           }
-            
-           
-                <hr />
-              </div>
-            );
-          })
-        ) : (
-          <h3>Loading...</h3>
-        )}
-      </>
-    );
+const {isLoading, users, error,todos} = this.state;
+return (
+  <>
+  <Link to ='/'> &larr; Go back home</Link>
+  {error ? <p>{error.message}</p>: null}
+  {!isLoading ? (<div className="flex">
+    <div >
+    <h3>Users</h3>
+    {users.map(user => {
+      const {name, email, id} = user;
+      return(
+        
+      
+        <div className="users" key={id} onClick={() => this.fetchTodo(id)}> 
+          Email- {email}, name - {name}, Id - {id}
+          
+        </div>
+       
+      )
+    })
+   
   }
+  </div>
+  <div>
+  {
+    
+    todos.map(todo => {
+      const {title, userId} = todo;
+     
+      return(
+        
+     
+        <Todo title={title} userId={userId} />
+        
+      )
+    })
+  }
+  </div>
+  </div>):(
+          <h3>Loading...</h3>
+        ) }
+  </>
+)
+  };
 }
-
-export default userTodo;
+ export default userTodo;
